@@ -37,12 +37,14 @@ chrome.runtime.onMessage.addListener(function (message, sender) {
                 chrome.tabs.query({}, function (tabs) {
                     for (var i = 0; i < tabs.length; i++) {
                         tab = tabs[i];
-
                         if (tab.url.indexOf(message.url_fragment) !== -1 && tab.id !== current_tab.id) {
+	                        var replaceTab = tab;
                             chrome.tabs.executeScript(current_tab.id, {
                                 code: 'window.onbeforeunload = function () {};'
                             }, function () {
-                                chrome.tabs.remove(current_tab.id);
+								var myurl = current_tab.url;
+								chrome.tabs.update(replaceTab.id, {url: myurl});
+								chrome.tabs.remove(current_tab.id);
                             });
                         }
                     }
