@@ -3,3 +3,4 @@ node_modules/
 coverage/
 dist.crx
 dist.pem
+.DS_Store
