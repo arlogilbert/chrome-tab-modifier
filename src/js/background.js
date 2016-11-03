@@ -43,7 +43,10 @@ chrome.runtime.onMessage.addListener(function (message, sender) {
                                 code: 'window.onbeforeunload = function () {};'
                             }, function () {
 								var myurl = current_tab.url;
-								chrome.tabs.update(replaceTab.id, {url: myurl});
+								chrome.tabs.update(replaceTab.id, {
+									url: myurl,
+									active: true
+								});
 								chrome.tabs.remove(current_tab.id);
                             });
                         }
